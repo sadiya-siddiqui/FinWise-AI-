@@ -1,0 +1,18 @@
+services:
+  db:
+    image: postgres:16
+    environment: { POSTGRES_USER: finwise, POSTGRES_PASSWORD: finwise, POSTGRES_DB: finwise }
+    volumes: [pgdata:/var/lib/postgresql/data]
+  redis:
+    image: redis:7-alpine
+  backend:
+    build: ./backend
+    env_file: ./backend/.env
+    ports: ["8000:8000"]
+    depends_on: [db, redis]
+  frontend:
+    build: { context: ./frontend, args: { VITE_API_URL: "http://localhost:8000" } }
+    ports: ["5173:80"]
+    depends_on: [backend]
+volumes:
+  pgdata:

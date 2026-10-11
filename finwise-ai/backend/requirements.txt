@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+redis
+pydantic-settings
+email-validator
+python-jose
+bcrypt
+python-multipart
+plaid-python
+openai
+pandas
+apscheduler
+psycopg2-binary
